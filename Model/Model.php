@@ -5,10 +5,12 @@ namespace Model;
 include_once("View/View.php");
 include_once("Model/User.php");
 include_once("Model/Medicijn.php");
-session_start();
+session_start([ //Expire cookies after 1 day
+    'cookie_lifetime' => 86400,
+]);
 
 class Model{
-    public function connectDB(){
+    public function connectDB(){ //Make connection to database
         try {
             $this->database = new \PDO("mysql:host=localhost;dbname=HealthOne", "root", "");
             $this->database->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -16,7 +18,7 @@ class Model{
         echo "Connection failed: " . $e->getMessage();
         }
     }
-    public function getArtsen(){
+    public function getArtsen(){ //Get all artsen to be checked by login
         $this->connectDB();
         $query = $this->database->query("SELECT * FROM artsen");
     
@@ -25,7 +27,7 @@ class Model{
             return $result;
         }
     }
-    public function getMedicijnen(){
+    public function getMedicijnen(){ //Get all medicijns and makes a class Medicijn
         $this->connectDB();
         $query = $this->database->query("SELECT * FROM medicijnen");
     
@@ -34,7 +36,7 @@ class Model{
             return $result;
         }
     }
-    public function getEditedMedicine(){
+    public function getEditedMedicine(){ //Gets a single medicijn that matches the one being edited.
         $this->connectDB();
         $getCurrentMedicijn = intval($_SESSION['CurrentMedicijnEdit']);
         $query = $this->database->prepare ("SELECT * FROM medicijnen WHERE id=:currentMedicijn");
@@ -46,13 +48,11 @@ class Model{
             return $result['0'];
         }
     }
-    public function logOut(){
-        unset($_SESSION['id']);
-        unset($_SESSION['user']);
-        unset($_SESSION['functie']);
-        unset($_SESSION['role']);
+    public function logOut(){ //Clears session
+        session_unset();
+        session_destroy();    
     }
-    public function addMedicijn($naam, $werking, $bijwerking, $prijs){
+    public function addMedicijn($naam, $werking, $bijwerking, $prijs){ //Create a new medicijn
         $this->connectDB();
         try{
             $query = $this->database->prepare ("INSERT INTO `medicijnen` (`id`,`naam`,`werking`,`bijwerking`,`prijs`) VALUES(NULL, :naam, :werking, :bijwerking, :prijs);");
@@ -67,7 +67,7 @@ class Model{
             echo"Error: ".$e->getMessage();
         }
     }
-    public function deleteMedicijn($id){
+    public function deleteMedicijn($id){ //Deletes a medicijn
         $this->connectDB();
         try{
             $query = $this->database->prepare ("DELETE FROM `medicijnen` WHERE id=:id");
@@ -79,7 +79,7 @@ class Model{
             echo"Error: ".$e->getMessage();
         }
     }
-    public function editMedicijn($id, $naam, $werking, $bijwerking, $prijs){
+    public function editMedicijn($id, $naam, $werking, $bijwerking, $prijs){ //Edits a medicijn
         $this->connectDB();
         try{
             $query = $this->database->prepare ("UPDATE `medicijnen` SET `naam` = :naam, `werking` = :werking, `bijwerking` = :bijwerking, `prijs` = :prijs WHERE `id` = :id");

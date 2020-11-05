@@ -17,7 +17,7 @@ class Controller{
         $this->checkLogin();
     }
 
-    public function updateView(){
+    public function updateView(){ //Checks what page is active and if button is clicked changes to webpage
         if(isset($_POST['log-uit'])){
             $this->view->currentPage = "";
             $this->model->logOut();
@@ -36,12 +36,12 @@ class Controller{
 
         } else if(isset($_POST['edit-med'])){
             $this->view->currentPage = "editMedicijn";
-            $id = filter_input(INPUT_POST, 'id');
-            $_SESSION['CurrentMedicijnEdit'] = $id;
+            $id = filter_input(INPUT_POST, 'id'); //Get patient ID zodat medicijn gedit kan worden
+            $_SESSION['CurrentMedicijnEdit'] = $id; //Bewaar ID
             $this->view->viewEditMedicijn();
 
         } else if(isset($_POST['publish-edit-medi'])){
-            $id = $_SESSION['CurrentMedicijnEdit'];
+            $id = $_SESSION['CurrentMedicijnEdit']; //Get ID to edit medicine from selection
             $naam = filter_input(INPUT_POST, 'naam');   
             $werking = filter_input(INPUT_POST, 'werking');
             $bijwerking = filter_input(INPUT_POST, 'bijwerking');
@@ -66,8 +66,8 @@ class Controller{
             $this->view->viewMedicijnen();
         }
     }
-    public function checkLogin(){
-        $artsen = $this->model->getArtsen();
+    public function checkLogin(){ //Check if info matches one of artsen database
+        $artsen = $this->model->getArtsen(); //Grabs info here from artsen database
         $username = filter_input(INPUT_POST, 'username');
         $password = filter_input(INPUT_POST, 'password');
 

@@ -10,8 +10,8 @@ echo '
         <div class="content">
            <form class="login-form" action="" method="POST">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required" aria-describedby="emailHelp">
+                    <label for="username">E-mail</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="E-mail" required="required" aria-describedby="emailHelp">
                     <small id="emailHelp" class="form-text text-muted">We\'ll never share your username or password with anyone else.</small>
                 </div>
                 <div class="form-group">
