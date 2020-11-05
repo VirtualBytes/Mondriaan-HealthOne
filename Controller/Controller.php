@@ -37,6 +37,7 @@ class Controller{
         } else if(isset($_POST['edit-med'])){
             $this->view->currentPage = "editMedicijn";
             $id = filter_input(INPUT_POST, 'id'); //Get patient ID zodat medicijn gedit kan worden
+            $this->model->setEditMedicijn($id);
             $this->view->viewEditMedicijn();
 
         } else if(isset($_POST['publish-edit-medi'])){

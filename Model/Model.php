@@ -10,6 +10,8 @@ session_start([ //Expire cookies after 1 day
 ]);
 
 class Model{
+    private $currentMedicijn;
+
     public function connectDB(){ //Make connection to database
         try {
             $this->database = new \PDO("mysql:host=localhost;dbname=HealthOne", "root", "");
@@ -34,18 +36,22 @@ class Model{
     public function getEditedMedicine(){ //Gets a single medicijn that matches the one being edited.
         $this->connectDB();
         try {
-            $getCurrentMedicijn = intval($_SESSION['CurrentMedicijnEdit']);
+            $getCurrentMedicijn = $this->currentMedicijn; //here give current medicijn
             $query = $this->database->prepare ("SELECT * FROM medicijnen WHERE id=:currentMedicijn");
             $query->bindParam(':currentMedicijn',  $getCurrentMedicijn);
             $result = $query->execute();
-                
-            if ($query){
-                $result = $query->fetchAll(\PDO::FETCH_CLASS,Medicijn::class);
-                return $result['0'];
+
+            if($result){ //If a email matches given email
+                $query->setFetchMode(\PDO::FETCH_CLASS,Medicijn::class);
+                $patient = $query->fetch();
+                return $patient;
             }
         } catch(\PDOException $e){
             echo "Connection failed: " . $e->getMessage();
         }
+    }
+    public function setEditMedicijn($id){ //Edits a medicijn
+        $this->currentMedicijn = $id;
     }
     public function logOut(){ //Clears session
         session_unset();
