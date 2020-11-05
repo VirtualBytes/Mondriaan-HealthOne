@@ -70,14 +70,20 @@ class Controller{
         $artsen = $this->model->getArtsen(); //Grabs info here from artsen database
         $username = filter_input(INPUT_POST, 'username');
         $password = filter_input(INPUT_POST, 'password');
+        $numItems = count($artsen);
+        $i = 0;
 
         if($username != NULL && $password != NULL){
             foreach($artsen as $data){
-                if($username == $data->getEmail() && $password == $data->getWachtwoord()){
+                if(strtolower($username) == strtolower($data->getEmail()) && $password == $data->getWachtwoord()){ //Email niet hoofdlettergevoelig
                     $_SESSION['id'] = $data->getId();
                     $_SESSION['user'] = $data->getNaam();
                     $_SESSION['functie'] = $data->getFunctie();
                     $_SESSION['role'] = $data->getRole();
+                    header("Refresh:0"); //Refreshes site clears incorrecte login error
+                }
+                if(++$i === $numItems) { //Only display error on last user check
+                    echo "Incorrecte login gegevens!";
                 }
             }
         }
