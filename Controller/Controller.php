@@ -56,8 +56,8 @@ class Controller{
             $bijwerking = filter_input(INPUT_POST, 'bijwerking');
             $prijs = filter_input(INPUT_POST, 'prijs');
             $this->model->addMedicijn($naam, $werking, $bijwerking, $prijs);
-            $this->view->currentPage = "AddMedicijn";
-            $this->view->viewAddMedicijn();
+            $this->view->currentPage = "Medicijnen";
+            $this->view->viewMedicijnen();
             
         } else if(isset($_POST['delete-med'])){
             $id = filter_input(INPUT_POST, 'id');

@@ -17,10 +17,11 @@ class Model{
             $this->database = new \PDO("mysql:host=localhost;dbname=HealthOne", "root", "");
             $this->database->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch(\PDOException $e){
-        echo "Connection failed: " . $e->getMessage();
+            echo "Connection failed: " . $e->getMessage();
         }
     }
-    public function getMedicijnen(){ //Get all medicijns and makes a class Medicijn
+
+    public function getMedicijnen(){ //Returns all medicijnen as a class
         $this->connectDB();
         try{
             $query = $this->database->query("SELECT * FROM medicijnen");
@@ -33,6 +34,7 @@ class Model{
             echo "Connection failed: " . $e->getMessage();
         }
     }
+
     public function getEditedMedicine(){ //Gets a single medicijn that matches the one being edited.
         $this->connectDB();
         try {
@@ -44,19 +46,22 @@ class Model{
             if($result){ //If a email matches given email
                 $query->setFetchMode(\PDO::FETCH_CLASS,Medicijn::class);
                 $patient = $query->fetch();
-                return $patient;
+                return $patient; //Returns the medicijn die ge edit word
             }
         } catch(\PDOException $e){
             echo "Connection failed: " . $e->getMessage();
         }
     }
+
     public function setEditMedicijn($id){ //Edits a medicijn
         $this->currentMedicijn = $id;
     }
+
     public function logOut(){ //Clears session
         session_unset();
         session_destroy();    
     }
+
     public function addMedicijn($naam, $werking, $bijwerking, $prijs){ //Create a new medicijn
         $this->connectDB();
         try{
@@ -65,25 +70,23 @@ class Model{
             $query->bindParam(":werking", $werking);
             $query->bindParam(":bijwerking",$bijwerking);
             $query->bindParam(":prijs",$prijs);
-            $result = $query->execute();
-            return $result;
-        }
-        catch(\PDOException $e){
+            $query->execute();
+        } catch(\PDOException $e){
             echo"Error: ".$e->getMessage();
         }
     }
+
     public function deleteMedicijn($id){ //Deletes a medicijn
         $this->connectDB();
         try{
             $query = $this->database->prepare ("DELETE FROM `medicijnen` WHERE id=:id");
             $query->bindParam(":id", $id);
-            $result = $query->execute();
-            return $result;
-        }
-        catch(\PDOException $e){
+            $query->execute();
+        } catch(\PDOException $e){
             echo"Error: ".$e->getMessage();
         }
     }
+
     public function editMedicijn($id, $naam, $werking, $bijwerking, $prijs){ //Edits a medicijn
         $this->connectDB();
         try{
@@ -94,11 +97,11 @@ class Model{
             $query->bindParam(":bijwerking",$bijwerking);
             $query->bindParam(":prijs",$prijs);
             $query->execute();
-        }
-        catch(\PDOException $e){
+        } catch(\PDOException $e){
             echo"Error: ".$e->getMessage();
         }
     }
+
     public function getUser($email, $password){
         $this->connectDB();
         $encryptedpassword = hash('sha256', $password); //Encrypt gegeven wachtwoord
