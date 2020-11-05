@@ -18,19 +18,6 @@ class Model{
         echo "Connection failed: " . $e->getMessage();
         }
     }
-    public function getArtsen(){ //Get all artsen to be checked by login
-        $this->connectDB();
-        try{
-            $query = $this->database->query("SELECT * FROM artsen");
-        
-            if($query){
-                $result = $query->fetchAll(\PDO::FETCH_CLASS,Arts::class);
-                return $result;
-            }
-        } catch(\PDOException $e){
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
     public function getMedicijnen(){ //Get all medicijns and makes a class Medicijn
         $this->connectDB();
         try{
