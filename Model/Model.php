@@ -20,32 +20,44 @@ class Model{
     }
     public function getArtsen(){ //Get all artsen to be checked by login
         $this->connectDB();
-        $query = $this->database->query("SELECT * FROM artsen");
-    
-        if($query){
-            $result = $query->fetchAll(\PDO::FETCH_CLASS,Arts::class);
-            return $result;
+        try{
+            $query = $this->database->query("SELECT * FROM artsen");
+        
+            if($query){
+                $result = $query->fetchAll(\PDO::FETCH_CLASS,Arts::class);
+                return $result;
+            }
+        } catch(\PDOException $e){
+            echo "Connection failed: " . $e->getMessage();
         }
     }
     public function getMedicijnen(){ //Get all medicijns and makes a class Medicijn
         $this->connectDB();
-        $query = $this->database->query("SELECT * FROM medicijnen");
-    
-        if($query){
-            $result = $query->fetchAll(\PDO::FETCH_CLASS,Medicijn::class);
-            return $result;
+        try{
+            $query = $this->database->query("SELECT * FROM medicijnen");
+        
+            if($query){
+                $result = $query->fetchAll(\PDO::FETCH_CLASS,Medicijn::class);
+                return $result;
+            }
+        } catch(\PDOException $e){
+            echo "Connection failed: " . $e->getMessage();
         }
     }
     public function getEditedMedicine(){ //Gets a single medicijn that matches the one being edited.
         $this->connectDB();
-        $getCurrentMedicijn = intval($_SESSION['CurrentMedicijnEdit']);
-        $query = $this->database->prepare ("SELECT * FROM medicijnen WHERE id=:currentMedicijn");
-        $query->bindParam(':currentMedicijn',  $getCurrentMedicijn);
-        $result = $query->execute();
-            
-        if ($query){
-            $result = $query->fetchAll(\PDO::FETCH_CLASS,Medicijn::class);
-            return $result['0'];
+        try {
+            $getCurrentMedicijn = intval($_SESSION['CurrentMedicijnEdit']);
+            $query = $this->database->prepare ("SELECT * FROM medicijnen WHERE id=:currentMedicijn");
+            $query->bindParam(':currentMedicijn',  $getCurrentMedicijn);
+            $result = $query->execute();
+                
+            if ($query){
+                $result = $query->fetchAll(\PDO::FETCH_CLASS,Medicijn::class);
+                return $result['0'];
+            }
+        } catch(\PDOException $e){
+            echo "Connection failed: " . $e->getMessage();
         }
     }
     public function logOut(){ //Clears session
@@ -92,6 +104,30 @@ class Model{
         }
         catch(\PDOException $e){
             echo"Error: ".$e->getMessage();
+        }
+    }
+    public function getUser($email, $password){
+        $this->connectDB();
+        $encryptedpassword = hash('sha256', $password); //Encrypt gegeven wachtwoord
+        $query = $this->database->prepare ("SELECT * FROM `artsen` WHERE `email` = :email");
+        $query->bindParam(":email", $email);
+        $result = $query->execute();
+            
+        if($result){ //If a email matches given email
+            $query->setFetchMode(\PDO::FETCH_CLASS,Arts::class);
+            $patient = $query->fetch();
+
+            if($patient){
+                if($encryptedpassword == $patient->getWachtwoord()){ //Check if password is correct
+                    $_SESSION['id'] = $patient->getId();
+                    $_SESSION['user'] = $patient->getNaam();
+                    $_SESSION['functie'] = $patient->getFunctie();
+                    $_SESSION['role'] = $patient->getRole();
+                    header("Refresh:0"); //Refreshes site clears incorrecte login error
+                } else {
+                    echo "Incorrect login gegevens";
+                }
+            }
         }
     }
 }

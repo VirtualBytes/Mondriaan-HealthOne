@@ -21,6 +21,9 @@ echo '
          <div class="content">
            <form class="medicijn-form" action="" method="POST">
                 <div class="form-group">
+                    <input type="text" class="form-control d-none" id="id" name="id" value="'.$currentMedicijn->getId().'" required="required">
+                </div>
+                <div class="form-group">
                     <label for="naam">Naam:</label>
                     <input type="text" class="form-control" id="naam" name="naam" value="'.$currentMedicijn->getNaam().'" required="required">
                 </div>

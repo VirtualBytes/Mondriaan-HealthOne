@@ -17,8 +17,8 @@ class View{
             include_once 'View/Pages/Login.php';
         }
     }
-    public function viewHomePage(){ //Can always see if logged in
-        if(!empty($_SESSION['user']) && $this->currentPage == NULL){
+    public function viewHomePage(){ //Can always see if user is logged in
+        if(!empty($_SESSION['user'] && $this->currentPage == NULL)){ //NULL staat voor dashboard page default altijd erop dan
             $this->currentPage = "Home";
             include 'View/Pages/Home.php';
         }

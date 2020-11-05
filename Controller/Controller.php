@@ -37,11 +37,10 @@ class Controller{
         } else if(isset($_POST['edit-med'])){
             $this->view->currentPage = "editMedicijn";
             $id = filter_input(INPUT_POST, 'id'); //Get patient ID zodat medicijn gedit kan worden
-            $_SESSION['CurrentMedicijnEdit'] = $id; //Bewaar ID
             $this->view->viewEditMedicijn();
 
         } else if(isset($_POST['publish-edit-medi'])){
-            $id = $_SESSION['CurrentMedicijnEdit']; //Get ID to edit medicine from selection
+            $id = filter_input(INPUT_POST, 'id'); //Get ID to edit medicine from selection
             $naam = filter_input(INPUT_POST, 'naam');   
             $werking = filter_input(INPUT_POST, 'werking');
             $bijwerking = filter_input(INPUT_POST, 'bijwerking');
@@ -66,26 +65,11 @@ class Controller{
             $this->view->viewMedicijnen();
         }
     }
-    public function checkLogin(){ //Check if info matches one of artsen database
-        $artsen = $this->model->getArtsen(); //Grabs info here from artsen database
-        $username = filter_input(INPUT_POST, 'username');
-        $password = filter_input(INPUT_POST, 'password');
-        $numItems = count($artsen);
-        $i = 0;
-
-        if($username != NULL && $password != NULL){
-            foreach($artsen as $data){
-                if(strtolower($username) == strtolower($data->getEmail()) && $password == $data->getWachtwoord()){ //Email niet hoofdlettergevoelig
-                    $_SESSION['id'] = $data->getId();
-                    $_SESSION['user'] = $data->getNaam();
-                    $_SESSION['functie'] = $data->getFunctie();
-                    $_SESSION['role'] = $data->getRole();
-                    header("Refresh:0"); //Refreshes site clears incorrecte login error
-                }
-                if(++$i === $numItems) { //Only display error on last user check
-                    echo "Incorrecte login gegevens!";
-                }
-            }
+    public function checkLogin(){
+        if(isset($_POST['Log-in'])){
+            $email = filter_input(INPUT_POST, 'email');
+            $password = filter_input(INPUT_POST, 'password');
+            $this->model->getUser($email, $password);
         }
     }
 }
