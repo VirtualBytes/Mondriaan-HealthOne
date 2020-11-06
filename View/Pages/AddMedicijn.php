@@ -5,18 +5,19 @@ include_once 'View/Nav.php';
 echo '
     <div id="page-grid">
         <form id="side-nav" action="" method="POST">
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="dashboard" value="Dashboard"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="patienten" value="Patienten"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="apotheken" value="Apotheken"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="medicijnen" value="Medicijnen"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="geschiedenis-Uitschrijvingen" value="Geschiedenis Uitschrijvingen"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="medicijn-Uitschrijven" value="Medicijn Uitschrijven"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="contact" value="Contact"/>
-            <input type="submit" class="list-group-item list-group-item-action" name="log-uit" id="log-uit" value="Log-uit"/>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="home"><i class="fas fa-home"></i> Home</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="patienten"><i class="fas fa-address-card"></i> Patienten</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="apotheken"><i class="fas fa-clinic-medical"></i> Apotheken</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="medicijnen"><i class="fas fa-prescription-bottle-alt"></i> Medicijnen</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="medicijn-Uitschrijven"><i class="fas fa-file-medical"></i> Medicijn Uitschrijven</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="contact"><i class="fas fa-envelope"></i> Contact</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="log-uit" id="log-uit"><i class="fas fa-sign-out-alt"></i></button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action active" name="med-page" id="add-med"><i class="fas fa-file-medical"></i> add-med</button>
         </form>
 
-         <div class="content">
-           <form class="medicijn-form" action="" method="POST">
+         <div id="content-add-medi" class="animate__animated animate__fadeIn">
+            <h1>Voeg nieuwe medicijn toe:</h1>
+            <form class="medicijn-form" action="" method="POST">
                 <div class="form-group">
                     <label for="naam">Naam:</label>
                     <input type="text" class="form-control" id="naam" name="naam" placeholder="naam" required="required">

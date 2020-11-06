@@ -114,11 +114,11 @@ class Model{
             $patient = $query->fetch();
 
             if($patient){
-                if($encryptedpassword == $patient->getWachtwoord()){ //Check if password is correct
-                    $_SESSION['id'] = $patient->getId();
-                    $_SESSION['user'] = $patient->getNaam();
-                    $_SESSION['functie'] = $patient->getFunctie();
-                    $_SESSION['role'] = $patient->getRole();
+                if($encryptedpassword == $patient->__get('wachtwoord')){ //Check if password is correct
+                    $_SESSION['id'] = $patient->__get('id');
+                    $_SESSION['user'] = $patient->__get('naam');
+                    $_SESSION['functie'] = $patient->__get('functie');
+                    $_SESSION['role'] = $patient->__get('role');
                     header("Refresh:0"); //Refreshes site clears incorrecte login error
                 } else {
                     echo "Incorrect login gegevens";

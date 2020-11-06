@@ -1,75 +1,217 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 100vh;
+    background: #F5F6F8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 /* Grid */
 #page-grid {
     display: grid;
-    grid-template-columns: 10vw 90vw;
-    grid-template-rows: 94vh;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-template-columns: 12vw 88vw;
+    grid-template-rows: 83.6vh 10vh repeat(3, 1fr);
+    grid-column-gap: 0;
+    grid-row-gap: 0;
 }
+.div1 {
+    grid-area: 1 / 1 / 2 / 2;
+}
+.div2 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+.div3 {
+    grid-area: 1 / 2 / 3 / 3;
+}
+
 #side-nav {
     grid-area: 1 / 1 / 2 / 2;
 }
-#content {
-    grid-area: 1 / 2 / 2 / 3;
+#side-nav-bottom {
+    grid-area: 2 / 1 / 3 / 2;
+    height: 0;
 }
-.navbar{
-    -webkit-box-shadow: 0px 5px 14px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 5px 14px 1px rgba(0,0,0,0.75);
-    box-shadow: 0px 5px 14px 1px rgba(0,0,0,0.75);
+#content {
+    grid-area: 1 / 2 / 3 / 3;
+}
+.navbar {
+    box-shadow: 0 0.125rem 9.375rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.5rem rgba(90, 97, 105, 0.12), 0 0.9375rem 1.375rem rgba(90, 97, 105, 0.1), 0 0.4375rem 2.1875rem rgba(165, 182, 201, 0.1);
+}
+
+/* Side nav */
+#side-nav > button {
+    border: none;
+    font-size: 1vw;
+    height: 5vh;
+}
+#side-nav > button:hover {
+    background: rgba(128, 128, 128, 0.26);
+}
+#side-nav {
+    z-index: 1;
+    font-size: 1vw;
+    height: 94vh;
+    background: #FFFFFF;
+    box-shadow: 0 0.125rem 9.375rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.5rem rgba(90, 97, 105, 0.12), 0 0.9375rem 1.375rem rgba(90, 97, 105, 0.1), 0 0.4375rem 2.1875rem rgba(165, 182, 201, 0.1);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+#side-nav-bottom {
+    z-index: 2;
+    font-size: 1vw;
+    position: absolute;
+    bottom: 0;
+    height: 5.8vh;
+    width: 12vw;
+}
+#side-nav-bottom:hover {
+    background: rgba(128, 128, 128, 0.26);
+}
+#log-uit {
+    background-color: rgba(161, 90, 90, 0.555);
+    text-align: center;
+}
+#add-med {
+    background-color: rgba(96, 161, 90, 0.555);
+    text-align: center;
+}
+.medicijn-form {
+    margin-top: 1.1vh;
+}
+
+/* Content */
+#content-edit-medi {
+    padding: 10px 40px;
+}
+#content-add-medi {
+    padding: 10px 40px;
+}
+#content-dashboard{
+    padding: 10px;
+    width: 87.63vw;
+}
+
+#submit-medicijn-wijziging {
+    width: 10vw;
+
+}
+.med-menu-buttons {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 /* Login form */
-.login-form {
-    width: 340px;
-    margin: 50px auto;
-    font-size: 15px;
-
-    /* background-color: white;
-    border: 1px solid black;
-    margin: auto auto;
-    margin-top: 20vh;
-    margin-right: calc(100% - 45vw);
-    height: 30vh; */
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
 }
-.login-form form {
-    margin-bottom: 15px;
-    background: #f7f7f7;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 30px;
+#login-background{
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 94.05vh;
+    width: 100%;
+    background: #7474BF; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #348AC7, #7474BF); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.login-form h2 {
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
     margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
-.form-control, .btn {
-    min-height: 38px;
-    border-radius: 2px;
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
 }
-.btn {        
-    font-size: 15px;
-    font-weight: bold;
-    width: 5vw;
+.form button:hover,
+.form button:active,
+.form button:focus {
+    background: #43A047;
 }
-
-/* Side nav */
-#side-nav{
-  margin: 1vw 1vh;
-  overflow-x: hidden;
-
-  display: flex;
-  flex-direction: column;
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
 }
-
-#log-uit{
-  background-color: rgba(161, 90, 90, 0.555);
-  text-align: center;
+.form .message a {
+    color: #4CAF50;
+    text-decoration: none;
 }
-
-#add-med{
-    background-color: rgba(96, 161, 90, 0.555);
+.form .register-form {
+    display: none;
+}
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 300px;
+    margin: 0 auto;
+}
+.container:before,
+.container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.container .info {
+    margin: 50px auto;
     text-align: center;
 }
+.container .info h1 {
+    margin: 0 0 15px;
+    padding: 0;
+    font-size: 36px;
+    font-weight: 300;
+    color: #1a1a1a;
+}
+.container .info span {
+    color: #4d4d4d;
+    font-size: 12px;
+}
+.container .info span a {
+    color: #000000;
+    text-decoration: none;
+}
+.container .info span .fa {
+    color: #EF3B3A;
+}
 
-.medicijn-form{
-    margin-top: 1.1vh;
+.card-deck {
+    margin-bottom: 10px;
+}
+.card {
+
 }

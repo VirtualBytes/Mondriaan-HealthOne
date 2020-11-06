@@ -22,7 +22,7 @@ class Controller{
             $this->view->currentPage = "";
             $this->model->logOut();
 
-        } else if (isset($_POST['dashboard'])){
+        } else if (isset($_POST['home'])){
             $this->view->currentPage = "";
             $this->view->viewHomePage();
 

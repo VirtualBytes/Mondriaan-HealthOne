@@ -9,18 +9,17 @@ $medicijnen = $this->model->getMedicijnen();
 echo '
     <div id="page-grid">
         <form id="side-nav" action="" method="POST">
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="dashboard" value="Dashboard"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="patienten" value="Patienten"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="apotheken" value="Apotheken"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="medicijnen" value="Medicijnen"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="geschiedenis-Uitschrijvingen" value="Geschiedenis Uitschrijvingen"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="medicijn-Uitschrijven" value="Medicijn Uitschrijven"/>
-            <input type="submit" class="p-2 list-group-item list-group-item-action bg-light" name="contact" value="Contact"/>
-            <input type="submit" class="list-group-item list-group-item-action" name="log-uit" id="log-uit" value="Log-uit"/>
-            <input type="submit" class="list-group-item list-group-item-action" name="med-page" id="add-med" value="add-med"/>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="home"><i class="fas fa-home"></i> Home</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="patienten"><i class="fas fa-address-card"></i> Patienten</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="apotheken"><i class="fas fa-clinic-medical"></i> Apotheken</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action active" name="medicijnen"><i class="fas fa-prescription-bottle-alt"></i> Medicijnen</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="medicijn-Uitschrijven"><i class="fas fa-file-medical"></i> Medicijn Uitschrijven</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="contact"><i class="fas fa-envelope"></i> Contact</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="log-uit" id="log-uit"><i class="fas fa-sign-out-alt"></i></button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="med-page" id="add-med"><i class="fas fa-file-medical"></i> add-med</button>
         </form>
 
-        <div id="content"> 
+        <div id="content-medi" class="animate__animated animate__fadeIn"> 
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -37,30 +36,30 @@ echo '
             ';
 
             foreach($medicijnen as $med){
-                echo "
+                echo '
                 <tr>
-                    <th scope=\"row\">".$med->getId()."</th> 
-                    <td>".$med->getNaam()."</td> 
-                    <td>".$med->getWerking()."</td> 
-                    <td>".$med->getBijwerking()."</td> 
-                    <td>€".$med->getPrijs()."</td> 
+                    <th scope="row">'.$med->__get('id').'</th> 
+                    <td>'.$med->__get('naam').'</td> 
+                    <td>'.$med->__get('werking').'</td> 
+                    <td>'.$med->__get('bijwerking').'</td> 
+                    <td>€'.$med->__get('prijs').'</td> 
                     <td> 
-                        <form method=\"POST\" action=\"\"> 
-                            <input type=\"number\" class=\"d-none\" name=\"id\" value=\"".$med->getId()."\"> 
-                            <input type=\"submit\" id=\"delete-med\" name=\"delete-med\" value=\"❌\"/>
+                        <form class="med-menu-buttons" method="POST" action=""> 
+                            <input type="number" class="d-none" name="id" value="'.$med->__get('id').'"\>
+                            <button type="submit" id="delete-med" name="delete-med"><i class="fas fa-trash-alt"></i></button>
                         </form> 
                     </td>
                     <td> 
-                        <form method=\"POST\" action=\"\"> 
-                            <input type=\"number\" class=\"d-none\" name=\"id\" value=\"".$med->getId()."\"> 
-                            <input type=\"text\" class=\"d-none\" name=\"naam\" value=\"".$med->getNaam()."\"> 
-                            <input type=\"text\" class=\"d-none\" name=\"werking\" value=\"".$med->getWerking()."\"> 
-                            <input type=\"text\" class=\"d-none\" name=\"bijwerking\" value=\"".$med->getBijwerking()."\"> 
-                            <input type=\"number\" class=\"d-none\" name=\"bijwerking\" step=\"any\" value=\"".$med->getPrijs()."\"> 
-                            <input type=\"submit\" id=\"edit-med\" name=\"edit-med\" value=\"✏️\"/>
+                        <form class="med-menu-buttons" method="POST" action=""> 
+                            <input type="number" class="d-none" name="id" value="'.$med->__get('id').'">
+                            <input type="text" class="d-none" name="naam" value="'.$med->__get('naam').'"> 
+                            <input type="text" class="d-none" name="werking" value="'.$med->__get('werking').'"> 
+                            <input type="text" class="d-none" name="bijwerking" value="'.$med->__get('bijwerking').'"> 
+                            <input type="number" class="d-none" name="bijwerking" step="any" value="'.$med->__get('bijwerking').'"> 
+                            <button type="submit" id="edit-med" name="edit-med"><i class="fas fa-edit"></i></button>
                         </form> 
                     </td>
-                </tr>";
+                </tr>';
             }
             
             echo '
