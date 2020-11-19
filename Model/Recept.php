@@ -3,13 +3,16 @@
 namespace Model;
 
 
-abstract class User{
-    protected $email;
-    protected $volnaam;
-    protected $functie;
-    protected $role;
+class Recept{
     protected $id;
-    protected $wachtwoord;
+    protected $med_id;
+    protected $patient_id;
+    protected $naam;
+    protected $prijs;
+    protected $hoeveelheid;
+    protected $user_id;
+    protected $volnaam;
+    protected $recept_id;
 
     public function __get($property) {
         if (property_exists($this, $property)) {
@@ -24,4 +27,3 @@ abstract class User{
         return $this;
     }
 }
-    

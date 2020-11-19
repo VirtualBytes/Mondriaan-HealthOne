@@ -1,6 +1,6 @@
 <?php
-include_once 'View/Head.php';
-include_once 'View/Nav.php';
+include_once 'View/Components/Head.php';
+include_once 'View/Components/Nav.php';
 
 echo '
     <div id="login-background">
@@ -22,4 +22,4 @@ echo '
     </div>
     ';
 
-include_once 'View/Scripts.php';
+include_once 'View/Components/Scripts.php';

@@ -9,9 +9,12 @@ echo '
             if(!empty($_SESSION['user'])){
                 echo '
                     <span class="navbar-text" style="color:white;">
-                        <i class="fas fa-id-badge"></i> '.$_SESSION['user'].' &nbsp; <i class="fas fa-user-md"></i>  '.$_SESSION['functie'].'
+                        <i class="fas fa-id-badge"></i> '.$_SESSION['user']; 
+                        
+                        if(!empty($_SESSION['functie'])){ 
+                            echo '&nbsp; <i class="fas fa-user-md"></i>  '.$_SESSION['functie'].'
                     </span>
-                ';
+                ';}
             } else {
                 echo `Not logged in`;
             }

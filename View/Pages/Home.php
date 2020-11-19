@@ -1,6 +1,6 @@
 <?php
-include_once 'View/Head.php';
-include_once 'View/Nav.php';
+include_once 'View/Components/Head.php';
+include_once 'View/Components/Nav.php';
 
 echo '
     <div id="page-grid">
@@ -9,7 +9,7 @@ echo '
             <button type="submit" class="p-2 list-group-item list-group-item-action" name="patienten"><i class="fas fa-address-card"></i> Patienten</button>
             <button type="submit" class="p-2 list-group-item list-group-item-action" name="apotheken"><i class="fas fa-clinic-medical"></i> Apotheken</button>
             <button type="submit" class="p-2 list-group-item list-group-item-action" name="medicijnen"><i class="fas fa-prescription-bottle-alt"></i> Medicijnen</button>
-            <button type="submit" class="p-2 list-group-item list-group-item-action" name="medicijn-Uitschrijven"><i class="fas fa-file-medical"></i> Medicijn Uitschrijven</button>
+            <button type="submit" class="p-2 list-group-item list-group-item-action" name="recepten"><i class="fas fa-file-medical"></i> Recepten</button>
             <button type="submit" class="p-2 list-group-item list-group-item-action" name="contact"><i class="fas fa-envelope"></i> Contact</button>
             <button type="submit" class="p-2 list-group-item list-group-item-action" name="log-uit" id="log-uit"><i class="fas fa-sign-out-alt"></i></button>
         </form>
@@ -43,4 +43,4 @@ echo '
     </div>
     ';
 
-include_once 'View/Scripts.php';
+include_once 'View/Components/Scripts.php';

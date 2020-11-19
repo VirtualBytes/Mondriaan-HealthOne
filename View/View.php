@@ -46,4 +46,25 @@ class View{
             }
         }
     }
+    public function viewRecepten(){ //Only able to view if logged in and has role that equals 3 or less (User rights)
+        if(isset($_SESSION['user'])){
+            if(!empty($_SESSION['user']) && $_SESSION['role'] <= 3 && $_SESSION['role'] == !NULL && $this->currentPage == "Recepten"){
+                include 'View/Pages/Recepten.php';
+            }
+        }
+    }
+    public function viewAddRecept(){ //Only able to view if logged in and has role that equals 3 or less (User rights)
+        if(isset($_SESSION['user'])){
+            if(!empty($_SESSION['user']) && $_SESSION['role'] <= 3 && $_SESSION['role'] == !NULL && $this->currentPage == "AddRecepten"){
+                include 'View/Pages/AddRecept.php';
+            }
+        }
+    }
+    public function viewEditRecept(){ //Only able to view if logged in and has role that equals 3 or less (User rights)
+        if(isset($_SESSION['user'])){
+            if(!empty($_SESSION['user']) && $_SESSION['role'] <= 3 && $_SESSION['role'] == !NULL && $this->currentPage == "editRecept"){
+                include 'View/Pages/editRecept.php';
+            }
+        }
+    }
 }

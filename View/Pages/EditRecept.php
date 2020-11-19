@@ -3,7 +3,9 @@ include_once 'View/Components/Head.php';
 include_once 'View/Components/Nav.php';
 
 $model = new Model\Model();
-$currentMedicijn = $this->model->getEditedMedicine();
+$currentRecept = $this->model->getEditedRecept();
+$medicijnen = $this->model->getMedicijnen();
+$patienten = $this->model->getPatienten();
 
 echo '
     <div id="page-grid">
@@ -18,28 +20,38 @@ echo '
         </form>
 
         <div id="content-edit-medi" class="animate__animated animate__fadeIn">
-            <h1>Wijzig medicijn: [ '.$currentMedicijn->__get('naam').' ]</h1>
+            <h1>Wijzig recept ID: [ '.$currentRecept->__get('recept_id').' ]</h1>
             <form class="medicijn-form" action="" method="POST">
                 <div class="form-group">
-                    <input type="text" class="form-control d-none" id="id" name="id" value="'.$currentMedicijn->__get('id').'" required="required">
+                    <input type="text" class="form-control d-none" id="recept_id" name="recept_id" value="'.$currentRecept->__get('recept_id').'" required="required">
                 </div>
                 <div class="form-group">
-                    <label for="naam">Naam:</label>
-                    <input type="text" class="form-control" id="naam" name="naam" value="'.$currentMedicijn->__get('naam').'" required="required">
+                    <label for="med_id">Medicijn: current [ '.$currentRecept->__get('recept_id').' ]</label>
+                    <select class="form-control" id="med_id" name="med_id">';
+
+                    foreach ($medicijnen as $med) {
+                        echo '<option value="'.$med->__get('id').'" '.($med->__get("id") === $currentRecept->__get("med_id") ? 'selected' : '').'>'.$med->__get('naam').'</option>';
+                    }
+
+                    echo '
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="werking">Werking:</label>
-                    <input type="text" class="form-control" id ="werking" name="werking" placeholder="werking" value="'.$currentMedicijn->__get('werking').'" rows="3" required="required">
+                    <label for="patient_id">Patient:</label>
+                    <select class="form-control" id="patient_id" name="patient_id"">';
+
+                    foreach ($patienten as $pat) {
+                        echo '<option value="'.$pat->__get('id').'" '.($pat->__get("id") === $currentRecept->__get("patient_id") ? 'selected' : '').'>'.$pat->__get('volnaam').'</option>';
+                    }
+
+                    echo '
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="bijwerking">Bijwerking:</label>
-                    <input type="text" class="form-control" id ="bijwerking" name="bijwerking" placeholder="bijwerking" value="'.$currentMedicijn->__get('bijwerking').'" rows="3" required="required">
+                    <label for="hoeveelheid">Hoeveelheid:</label>
+                    <input type="number" class="form-control" id ="hoeveelheid" name="hoeveelheid" placeholder="hoeveelheid" value="'.$currentRecept->__get("hoeveelheid").'" required="required">
                 </div>
-                <div class="form-group">
-                    <label for="prijs">Prijs:</label>
-                    <input type="number" class="form-control" id ="prijs" name="prijs" placeholder="prijs" step="any" value="'.$currentMedicijn->__get('prijs').'" required="required">
-                </div>
-                <button type="submit" id="publish-edit-medi" class="btn btn-primary" name="publish-edit-medi">Stuur wijziging</button>
+                <button type="submit" id="submit-medicijn-wijziging" class="btn btn-primary" name="publish-edit-recept">Stuur wijziging</button>
             </form>
 
         </div>
