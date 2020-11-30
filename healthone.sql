@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 19 nov 2020 om 13:38
+-- Gegenereerd op: 30 nov 2020 om 18:21
 -- Serverversie: 10.4.14-MariaDB
 -- PHP-versie: 7.4.9
 
@@ -73,9 +73,10 @@ CREATE TABLE `medicijnen` (
 --
 
 INSERT INTO `medicijnen` (`id`, `naam`, `werking`, `bijwerking`, `prijs`) VALUES
-(2, 'amoxicilline', 'breedspectrum antibioticum, actief tegen grampositieve en gramnegatieve bacteriën', 'braken, buikpijn, diarree, spijsverteringsstoornissen, huidirritaties, maagdarm-stoornissen', 11.51),
+(2, 'amoxicilline', 'breedspectrum antibioticum, actief tegen grampositieve en gramnegatieve bacteriën', 'braken, buikpijn, diarree, spijsverteringsstoornissen, huidirritaties, maagdarm-stoornissen', 11.50),
 (3, 'omeprazol', 'remt de productie van overmatig maagzuur. Omeprazol behoort tot de klasse van protonremmers. Omeprazol wordt ingezet ter preventie en behandeling van maagzweren.', 'duizeligheid, verwarring, snelle en onregelmatige hartslag, schokkende spierbewegingen, zich schrikachtig voelen, spierkrampen, spierzwakte of slap gevoel.', 15.23),
-(192, 'diclofenac', 'pijnstiller, koortsverlagende werking, ontstekingsremmende werking. Goed bij acute pijn en chronische ziektes zoals reuma en jicht', 'pijn op de borst, kortademingheid, zwarte of zeer donkere ontlasting, ophoesten van bloed, blauwe plekken', 6.90);
+(192, 'diclofenac', 'pijnstiller, koortsverlagende werking, ontstekingsremmende werking. Goed bij acute pijn en chronische ziektes zoals reuma en jicht', 'pijn op de borst, kortademingheid, zwarte of zeer donkere ontlasting, ophoesten van bloed, blauwe plekken', 6.90),
+(194, 'Test', 'Test', 'test', 123.41);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,7 @@ CREATE TABLE `recepten` (
 
 INSERT INTO `recepten` (`recept_id`, `med_id`, `patient_id`, `hoeveelheid`) VALUES
 (4, 2, 1809004, 3),
-(5, 2, 1809004, 1);
+(5, 3, 1809005, 1);
 
 -- --------------------------------------------------------
 
@@ -200,7 +201,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `medicijnen`
 --
 ALTER TABLE `medicijnen`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT voor een tabel `patienten`
@@ -212,7 +213,7 @@ ALTER TABLE `patienten`
 -- AUTO_INCREMENT voor een tabel `recepten`
 --
 ALTER TABLE `recepten`
-  MODIFY `recept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `recept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
