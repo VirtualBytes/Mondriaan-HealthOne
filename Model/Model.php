@@ -203,9 +203,9 @@ class Model{
         $this->connectDB();
         try{
             $query = $this->database->query ("SELECT * FROM recepten AS recept
-            LEFT OUTER JOIN medicijnen AS med ON recept.med_id = med.id
-            LEFT OUTER JOIN patienten AS patient ON recept.patient_id = patient.user_id
-            LEFT OUTER JOIN users AS user ON recept.patient_id = user.id");
+            JOIN medicijnen AS med ON recept.med_id = med.id
+            JOIN patienten AS patient ON recept.patient_id = patient.user_id
+            JOIN users AS user ON recept.patient_id = user.id");
 
             if($query){
                 $result = $query->fetchAll(\PDO::FETCH_CLASS,Recept::class);
